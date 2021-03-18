@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vue js - laravel</title>
+    <title>GB Clientes</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
                     <img src="{{asset('photo/adminimage.jpg')}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <router-link to="/home" class="d-block">{{auth::user()->name}}</router-link>
+                    <router-link to="/home" class="d-block">{{auth::user()->email}}</router-link>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-                    <li class="nav-item has-treeview">
+                    {{-- <li class="nav-item has-treeview">
                         <router-link to="/home" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -40,16 +40,16 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </router-link>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                         <router-link to="/category-list" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Category
                             </p>
                         </router-link>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                         <router-link to="/post-list" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -57,18 +57,18 @@
                                 <span class="right badge badge-danger">New</span>
                             </p>
                         </router-link>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
-                        <router-link to="/employee" class="nav-link">
+                        <router-link to="/clientes" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
-                            <small for="">Employee(custom Data Table)</small>
+                            <p>Clientes</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Salir') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -92,10 +92,9 @@
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
+            <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
+        <strong>Copyright &copy; 2020 <a href="https://galacticblum.com">Galacticblum</a>.</strong> .
     </footer>
 
     <!-- Control Sidebar -->

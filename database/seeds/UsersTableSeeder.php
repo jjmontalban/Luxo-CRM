@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -14,12 +16,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Administrator',
-            'email' => 'a@a.com',
-            'password' => Hash::make('a'),
+            'email' => 'info@galacticblum.com',
+            'password' => Hash::make('Gb11550.'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
-        factory(\App\User::class,2)->create();
     }
 }

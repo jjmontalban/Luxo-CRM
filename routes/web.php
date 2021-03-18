@@ -31,7 +31,7 @@ Route::get('/category-edit/{id}', 'HomeController@index');
 Route::get('/post-list', 'HomeController@index');
 Route::get('/post-add', 'HomeController@index');
 Route::get('/post-edit/{id}', 'HomeController@index');
-Route::get('/employee', 'HomeController@index');
+Route::get('/clientes', 'HomeController@index');
 Route::get('/blog', 'BlogController@index');
 
 

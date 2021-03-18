@@ -8,11 +8,11 @@ class Post extends Model
 {
     public function userdata()
     {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->hasMany(User::class,'id','id');
     }
     public function categorydata()
     {
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class,'id','id');
     }
 
 }

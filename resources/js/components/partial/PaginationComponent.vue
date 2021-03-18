@@ -47,7 +47,7 @@ export default {
             total: 193,
             per_page: 5,
             last_page: 39,
-            path: "http://127.0.0.1:8000/api/employee",*/
+            path: "http://127.0.0.1:8000/api/cliente",*/
         pages() {
 
             let pages = []

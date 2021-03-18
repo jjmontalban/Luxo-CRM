@@ -16,8 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('employee','EmployeeController');
-Route::get('employee/search/{field}/{query}','EmployeeController@search');
+
+Route::apiResource('clientes','CustomerController');
+Route::get('cliente/buscar/{field}/{query}','CustomerController@search');
 
 
 

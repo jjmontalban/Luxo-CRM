@@ -164,13 +164,6 @@ ul.clients li:hover {
     background-color: #FFD053;
 }
 
-/* fancybox */
-.fancybox-close:hover {
-	background-color:#FFD053;
-}
-.fancybox-nav:hover span {
-	background-color:#FFD053;
-}
 
 /* parallax c slider */
 .da-slide .da-link:hover{

@@ -7,7 +7,7 @@ import postList from './components/admin/post/list'
 import addPost from './components/admin/post/new'
 import editPost from './components/admin/post/edit'
 
-import employee from './components/admin/employee'
+import customer from './components/admin/customer'
 
 //front end
 import frontendHomepage from './components/frontend/frontendHome'
@@ -72,8 +72,8 @@ export const projectRoutes = [
 
     },
     {
-        path: '/employee',
-        component: employee
+        path: '/clientes',
+        component: customer
 
     },
 ]

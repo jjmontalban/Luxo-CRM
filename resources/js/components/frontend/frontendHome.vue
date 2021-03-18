@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h3> This is a demo of single page custom data table using laravel and vue js.</h3>
-        <h3> Please <a href="/login">Login</a> and check my custome data table....... </h3>
-
+        <h3><a href="/login">Login</a></h3>
     </div>
 
 </template>
@@ -23,4 +21,9 @@ export default {
 
 <style scoped>
 
+h3{
+      text-align: center;
+      color: aqua;
+
+}
 </style>
