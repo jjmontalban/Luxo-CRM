@@ -32,7 +32,7 @@
                                         <ul class="meta-post">
                                             <li><i class="icon-calendar"></i><a href="#"> Mar 23, 2013</a></li>
                                             <li><i class="icon-user"></i><a href="#"> {{ post.userdata.name }}</a></li>
-                                            <li v-if="post.categorydata"><i class="icon-folder-open"></i><a href="#"> {{ post.categorydata.title }}</a></li>
+                                        <li v-if="post.categorydata"><i class="icon-folder-open"></i><a href="#"> {{ post.categorydata.title }}</a></li>
                                             <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
                                         </ul>
                                         <router-link :to="`single-post/${post.id}`" class="pull-right">Continue reading <i class="icon-angle-right"></i></router-link>

@@ -30,7 +30,7 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ post.title }}</td>
                                 <td><img :src="'photo/'+post.photo" alt="" width="50px"></td>
-                                <td v-if="post.userdata">{{ post.userdata.name }}</td>
+                                <td v-if="post.userdata">{{ post.name }}</td>
                                 <td v-else style="color: red">deleted</td>
                                 <td v-if="post.categorydata">{{ post.categorydata.title }}</td>
                                 <td v-else style="color: red">deleted</td>

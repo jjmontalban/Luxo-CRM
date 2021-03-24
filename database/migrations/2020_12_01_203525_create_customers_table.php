@@ -23,8 +23,6 @@ class CreateCustomersTable extends Migration
             $table->string('company');
             $table->string('cif')->unique()->nullable();
             $table->string('vat_number')->unique()->nullable();
-            $table->date('date_add')->nullable();
-            $table->text('address');
             
             $table->timestamps();
             $table->softDeletes();

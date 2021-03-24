@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('clientes','CustomerController');
 Route::get('cliente/buscar/{field}/{query}','CustomerController@search');
+Route::get('provincias','ProvinceController@index');
+Route::get('paises','CountryController@index');
 
 
 

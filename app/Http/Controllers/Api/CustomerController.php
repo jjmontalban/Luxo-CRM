@@ -17,7 +17,14 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return new CustomerCollection(Customer::orderBy('id','DESC')->paginate(10));
+/*         return new CustomerCollection(Customer::orderBy('id','DESC')->paginate(10));
+ */
+      /*   $customers = Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50);
+        return response()->json([
+            "customers_data" => $customers
+        ], 200); */
+
+        return new CustomerCollection(Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50));
     }
 
     public function search($field,$query)

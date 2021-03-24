@@ -7,7 +7,7 @@ export default {
         category_frontend:[],
         latestPosts:[],
     },
-    getters: {
+    getters: {    
         getCategory(state) {
             return state.category
         },

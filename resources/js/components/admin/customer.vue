@@ -44,8 +44,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombre y apellidos</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Email</th>
                     <th scope="col">Telefono 1</th>
@@ -56,19 +55,28 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-show="customers.length"
                     v-for="(customer, index) in customers"
                     :key="customer.id"
                   >
-                    <th scope="row">{{ index + 1 }}</th>
-                    <td>{{ customer.firstname}}</td>
-                    <td>{{ customer.lastname}}</td>
+                    <td>{{ customer.id}}</td>
+                    <td>{{ customer.firstname}} {{ customer.lastname}}</td>
                     <td>{{ customer.company}}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.phone_1 }}</td>
                     <td>{{ customer.phone_2 }}</td>
-                    <td>{{ customer.address }}</td>
-                    <td class="text-center">
+                    <td v-if="customer.addresses">
+                        <tr v-for="(address, index) in customer.addresses" :key="address.id">
+                          <td>{{ address.address }}</td>
+                          <td>{{ address.postcode }}</td>
+                          <td>{{ address.city }}</td>
+                          <td v-if="address.province.name">{{ address.province.name }}</td>
+                          <td v-if="address.country.name">{{ address.country.name }}</td>
+                       </tr>
+                    </td>
+                    <td v-else>
+                        Sin dirección
+                    </td> 
+                        <td class="text-center">
                       <button type="button" @click="show(customer)" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i>
                       </button>
@@ -84,7 +92,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr v-show="!customers.length">
+                  <tr >
                     <td colspan="6">
                       <div class="alert alert-danger" role="alert">Lo siento :( Datos no encontrados.</div>
                     </td>
@@ -102,7 +110,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal new -->
     <div
       class="modal fade"
       id="customerModalLong"
@@ -117,7 +125,7 @@
             <h5
               class="modal-title"
               id="customerModalLongTitle"
-            >{{ editMode ? "Edit" : "Añadir nuevo" }} Cliente</h5>
+            >{{ editMode ? "Editar" : "Añadir nuevo" }} Cliente</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -126,7 +134,7 @@
             <div class="modal-body">
               <alert-error :form="form"></alert-error>
               <div class="form-group">
-                <label>Nombre</label>
+              <label>Nombre</label>
                 <input
                   v-model="form.firstname"
                   type="text"
@@ -170,7 +178,7 @@
                 <has-error :form="form" field="email"></has-error>
               </div>
               <div class="form-group">
-                <label>Phone 1</label>
+                <label>Teléfono 1</label>
                 <input
                   v-model="form.phone_1"
                   type="text"
@@ -181,7 +189,7 @@
                 <has-error :form="form" field="phone_1"></has-error>
               </div>
               <div class="form-group">
-                <label>Phone 2</label>
+                <label>Teléfono 2</label>
                 <input
                   v-model="form.phone_2"
                   type="text"
@@ -192,14 +200,56 @@
                 <has-error :form="form" field="phone_2"></has-error>
               </div>
               <div class="form-group">
-                <label>Address</label>
-                <textarea
-                  v-model="form.address"
-                  name="address"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('address') }"
-                ></textarea>
-                <has-error :form="form" field="address"></has-error>
+                <div class="form-group">
+                    
+                    <label>Dirección</label>
+                    <input v-model="form.addresses.address"
+                            type="text"
+                            name="addresses.address"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('addresses.address') }">
+                    <has-error :form="form" field="addresses.address"></has-error>
+                    
+                    <label>Código Postal</label>
+                    <input v-model="form.addresses.postcode"
+                            type="text"
+                            name="addresses.postcode"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('addresses.postcode') }">
+                    <has-error :form="form" field="addresses.postcode"></has-error>
+                    
+                    <label>Cuidad</label>
+                    <input v-model="form.addresses.city"
+                            type="text"
+                            name="addresses.city"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('addresses.postcode') }">
+                    <has-error :form="form" field="addresses.city"></has-error>
+                    
+                    <label>País</label>
+                    <select v-model="form.country"
+                            :class="{ 'is-invalid': form.errors.has('country') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option disabled value="">Elegir una</option>
+                        <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
+                    </select>
+                    <has-error :form="form" field="country"></has-error>
+
+                    <label>Provincia</label>
+                    <select v-model="form.province"
+                            :class="{ 'is-invalid': form.errors.has('province') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option disabled value="">Elegir una</option>
+                        <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
+                    </select>
+                    <has-error :form="form" field="province"></has-error>
+
+                </div>
+                
+          
+                <has-error :form="form" field="customer.addresses"></has-error>
               </div>
             </div>
             <div class="modal-footer">
@@ -210,7 +260,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal view -->
     <div
       class="modal fade"
       id="showModal"
@@ -222,21 +272,30 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="showModalLabel">{{ form.firstname }}</h5>
+            <h5 class="modal-title" id="showModalLabel">#{{ form.id }} {{ form.firstname }} {{ form.lastname }}</h5>
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <strong>Email : {{ form.email }}</strong>
-            <br>
-            <strong>Teléfono : {{ form.phone_1 }}</strong>
-            <br>
-            <strong>Empresa : {{ form.company }}</strong>
-            <br>
-            <strong>Dirección :</strong>
-            <address>{{ form.address }}</address>
+            <p><strong>· Empresa : {{ form.company }}</strong>
+            <p><strong>· Email :</strong> {{ form.email }}</p>
+            <p><strong v-if="form.phone_1">· Teléfono 1: </strong>{{ form.phone_1 }}</p>
+            <p><strong v-if="form.phone_2">· Teléfono 2 : </strong>{{ form.phone_2 }}</p>
+            <p><strong>· CIF :</strong> {{ form.cif }}</p>
+            <p><strong v-if="form.vat_number">· VAT : </strong>{{ form.vat_number }}</p>
+            <p><strong>· Fecha creación : </strong>{{ form.created_at }}</p>
+            <p><strong>· Fecha modificación : </strong>{{ form.updated_at }}</p>
+            <td v-if="form.addresses">
+              <tr v-for="(address, index) in form.addresses" :key="address.id">
+                <p><strong>· Dirección {{ address.alias }}:</strong></p>
+                <p>&nbsp;&nbsp;&nbsp;{{ address.address }}. {{ address.postcode }} {{ address.city }} ({{ address.province.name }}). {{ address.country.name }}</p> 
+              </tr>
+            </td>
+            <td v-else>
+                Sin Dirección
+            </td>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -251,21 +310,33 @@
 
 <script>
 export default {
+    mounted() {
+        this.getData()
+        /* this.$store.dispatch("getProvince") */
+    },
     data() {
         return {
             editMode: false,
             query: "",
             queryFiled: "firstname",
             customers: [],
+            provinces:[],
+            countries:[],
+
             form: new Form({
-                id: "",
                 firstname: "example",
                 lastname: "example",
                 company: "example",
                 email: "example@example.com",
                 phone_1: "661661661",
                 phone_2: "662662662",
-                address: "example"
+                cif: "662662662",
+                vat_number: "662662662",
+                created_at: "662662662",
+                updated_at: "662662662",
+                country: '',
+                province: '',
+                addresses:[],
                 }),
             pagination: {
                 current_page: 1
@@ -286,10 +357,33 @@ export default {
 
     created() {},
 
-    mounted() {
-        this.getData()
+    computed: {
+      getProvinces() {
+            axios.get("/api/provincias")
+                .then((res) => {
+                    console.log(res.data.data);
+                    this.provinces = res.data.data
+                    this.$Progress.finish();
+                }).catch((e) => {
+                this.$Progress.fail();
+                console.log(e)
+            })
+        },
+
+      getCountries() {
+            axios.get("/api/paises")
+                .then((res) => {
+                    console.log(res.data.data);
+                    this.countries = res.data.data
+                    this.$Progress.finish();
+                }).catch((e) => {
+                this.$Progress.fail();
+                console.log(e)
+            })
+        }
+
+
     },
-    computed: {},
 
     methods: {
 
@@ -409,7 +503,7 @@ export default {
         destroy(customer) {
             this.$snotify.clear();
             this.$snotify.confirm(
-                "Tendrás que llamar a kino para recuperarlo!",
+                "No se puede deshacer!",
                 "Seguro?",
                 {
                     showProgressBar: false,

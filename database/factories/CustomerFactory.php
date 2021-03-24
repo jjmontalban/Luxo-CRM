@@ -13,9 +13,9 @@ $factory->define(Customer::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'phone_1' => $faker->phoneNumber,
         'phone_2' => $faker->phoneNumber,
-        'address' => $faker->address,
         'company' => $faker->name(),
-        'CIF' => rand(500000001, 590000001),
-        'date_add' => Carbon::parse('2000-01-01'),
+        'CIF' => rand(100000001, 990000001),
+        'created_at' => $faker->dateTimeInInterval($startDate = '-30 years', $endDate = '-3 years', $interval = '+ 5 days'),
+        'updated_at' => $faker->dateTimeThisYear($max = 'now')
     ];
 });
