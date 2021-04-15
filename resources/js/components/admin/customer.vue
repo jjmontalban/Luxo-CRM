@@ -114,7 +114,7 @@
       aria-labelledby="customerModalLongTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5
@@ -129,222 +129,239 @@
             <div class="modal-body">
 
               <alert-error :form="form"></alert-error>
-              <div class="form-group">
-              <label>Nombre</label>
-                <input
-                  v-model="form.firstname"
-                  type="text"
-                  name="firstname"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('firstname') }"
-                >
-                <has-error :form="form" field="firstname"></has-error>
+              <div class="form-group row">
+                <div class="col-4">
+                  <label>Nombre</label>
+                    <input
+                      v-model="form.firstname"
+                      type="text"
+                      name="firstname"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('firstname') }"
+                    >
+                    <has-error :form="form" field="firstname"></has-error>
+                </div>
+                <div class="col-4">
+                  <label>Apellidos</label>
+                  <input
+                    v-model="form.lastname"
+                    type="text"
+                    name="lastname"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('lastname') }"
+                  >
+                  <has-error :form="form" field="lastname"></has-error>
+                </div>
+                <div class="col-4">
+                  <label>Empresa</label>
+                  <input
+                    v-model="form.company"
+                    type="text"
+                    name="company"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('company') }"
+                  >
+                  <has-error :form="form" field="company"></has-error>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Apellidos</label>
-                <input
-                  v-model="form.lastname"
-                  type="text"
-                  name="lastname"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('lastname') }"
-                >
-                <has-error :form="form" field="lastname"></has-error>
-              </div>
-              <div class="form-group">
-                <label>Empresa</label>
-                <input
-                  v-model="form.company"
-                  type="text"
-                  name="company"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('company') }"
-                >
-                <has-error :form="form" field="company"></has-error>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input
-                  v-model="form.email"
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('email') }"
-                >
-                <has-error :form="form" field="email"></has-error>
-              </div>
-              <div class="form-group">
-                <label>Teléfono 1</label>
-                <input
-                  v-model="form.phone_1"
-                  type="text"
-                  name="phone_1"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('phone_1') }"
-                >
-                <has-error :form="form" field="phone_1"></has-error>
-              </div>
-              <div class="form-group">
-                <label>Teléfono 2</label>
-                <input
-                  v-model="form.phone_2"
-                  type="text"
-                  name="phone_2"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('phone_2') }"
-                >
-                <has-error :form="form" field="phone_2"></has-error>
-              </div>
-              <div class="form-group">
-                <label>CIF</label>
-                <input
-                  v-model="form.cif"
-                  type="text"
-                  name="cif"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('cif') }"
-                >
-                <has-error :form="form" field="cif"></has-error>
-              </div>
-              <div class="form-group">
-                <label>VAT number</label>
-                <input
-                  v-model="form.vat_number"
-                  type="text"
-                  name="vat_number"
-                  class="form-control"
-                  :class="{ 'is-invalid': form.errors.has('vat_number') }"
-                >
-                <has-error :form="form" field="vat_number"></has-error>
-              </div>  
 
+              <div class="form-group row">
+                <div class="col-4">
+                  <label>Email</label>
+                  <input
+                    v-model="form.email"
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('email') }"
+                  >
+                  <has-error :form="form" field="email"></has-error>
+                </div>
+                <div class="col-4">
+                  <label>Teléfono 1</label>
+                  <input
+                    v-model="form.phone_1"
+                    type="text"
+                    name="phone_1"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('phone_1') }"
+                  >
+                  <has-error :form="form" field="phone_1"></has-error>
+                </div>
+                <div class="col-4">
+                  <label>Teléfono 2</label>
+                  <input
+                    v-model="form.phone_2"
+                    type="text"
+                    name="phone_2"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('phone_2') }"
+                  >
+                  <has-error :form="form" field="phone_2"></has-error>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-6">
+                  <label>CIF</label>
+                  <input
+                    v-model="form.cif"
+                    type="text"
+                    name="cif"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('cif') }"
+                  >
+                  <has-error :form="form" field="cif"></has-error>
+                </div>
+                <div class="col-6">
+                  <label>VAT number</label>
+                  <input
+                    v-model="form.vat_number"
+                    type="text"
+                    name="vat_number"
+                    class="form-control"
+                    :class="{ 'is-invalid': form.errors.has('vat_number') }"
+                  >
+                  <has-error :form="form" field="vat_number"></has-error>
+                </div>  
+              </div>
+              
               <div v-if="!editMode">
+                <hr>
+                <div class="row">
+                  <div class="form-group col-3">
+                    <label>Alias de dirección</label>
+                    <input
+                      v-model="form.alias"
+                      type="text"
+                      name="alias"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('alias') }"
+                    >
+                    <has-error :form="form" field="alias"></has-error>
+                  </div>
+                  <div class="form-group col-6">
+                    <label>Dirección</label>
+                    <input
+                      v-model="form.address"
+                      type="text"
+                      name="address"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('address') }"
+                    >
+                    <has-error :form="form" field="address"></has-error>
+                  </div>
+                  <div class="form-group col-3">
+                    <label>Código Postal</label>
+                    <input
+                      v-model="form.postcode"
+                      type="text"
+                      name="postcode"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('postcode') }"
+                    >
+                    <has-error :form="form" field="postcode"></has-error>
+                  </div>
+                </div>
 
-                <div class="form-group">
-                  <label>Alias de dirección</label>
-                  <input
-                    v-model="form.alias"
-                    type="text"
-                    name="alias"
-                    class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('alias') }"
-                  >
-                  <has-error :form="form" field="alias"></has-error>
+                <div class="row">
+                  <div class="form-group col-4">
+                    <label>Ciudad</label>
+                    <input
+                      v-model="form.city"
+                      type="text"
+                      name="city"
+                      class="form-control"
+                      :class="{ 'is-invalid': form.errors.has('city') }"
+                    >
+                    <has-error :form="form" field="city"></has-error>
+                  </div>
+                  <div class="form-group col-4">
+                    <label>Provincia</label>
+                    <select v-model="form.province_id"
+                            :class="{ 'is-invalid': form.errors.has('province_id') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
+                      <option value="">Elegir una</option>
+                    </select>
+                    <has-error :form="form" field="province_id"></has-error>
+                  </div>
+                  <div class="form-group col-4">
+                    <label>País</label>
+                    <select v-model="form.country_id"
+                            :class="{ 'is-invalid': form.errors.has('country_id') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
+                        <option value="">Elegir uno</option>
+                    </select>
+                    <has-error :form="form" field="country_id"></has-error>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Dirección</label>
-                  <input
-                    v-model="form.address"
-                    type="text"
-                    name="address"
-                    class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('address') }"
-                  >
-                  <has-error :form="form" field="address"></has-error>
-                </div>
-                <div class="form-group">
-                  <label>Código Postal</label>
-                  <input
-                    v-model="form.postcode"
-                    type="text"
-                    name="postcode"
-                    class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('postcode') }"
-                  >
-                  <has-error :form="form" field="postcode"></has-error>
-                </div>
-                <div class="form-group">
-                  <label>Ciudad</label>
-                  <input
-                    v-model="form.city"
-                    type="text"
-                    name="city"
-                    class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('city') }"
-                  >
-                  <has-error :form="form" field="city"></has-error>
-                </div>
-                <label>Provincia</label>
-                <select v-model="form.province_id"
-                        :class="{ 'is-invalid': form.errors.has('province_id') }"
-                        class="form-control select2 select2-danger"
-                        data-dropdown-css-class="select2-danger" style="width: 100%;">
-                    <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
-                   <option value="">Elegir una</option>
-                </select>
-                <has-error :form="form" field="province_id"></has-error>
-                <label>País</label>
-                <select v-model="form.country_id"
-                        :class="{ 'is-invalid': form.errors.has('country_id') }"
-                        class="form-control select2 select2-danger"
-                        data-dropdown-css-class="select2-danger" style="width: 100%;">
-                    <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
-                   <option value="">Elegir uno</option>
-                </select>
-                <has-error :form="form" field="country_id"></has-error>
-
-                <!-- <div class="form-group">
-                  <label>País</label>
-                  <input
-                    v-model="form.country"
-                    type="text"
-                    name="country"
-                    class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('country') }"
-                  >
-                  <has-error :form="form" field="country"></has-error>
-                </div> -->
 
               </div>
 
               <div v-for="(address, index) in form.addresses" :key="address.id">
-                  
-                  <h4 align="center">{{ address.alias }}</h4> 
+                <br>  
+                <h5><strong>Dirección {{ index+1 }}</strong> ({{ address.alias }})</h5> 
+                <hr>
+                <div class="form-group row">
+                  <div class="col-8">
+                    <label>Dirección</label>
+                    <input v-model="address.address"
+                            type="text"
+                            name="address"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('address') }">
+                    <has-error :form="form" field="address"></has-error>
+                  </div>
+                  <div class="col-4">
+                    <label>Código Postal</label>
+                    <input v-model="address.postcode"
+                            type="text"
+                            name="postcode"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('postcode') }">
+                    <has-error :form="form" field="postcode"></has-error>
+                  </div>
+                </div>
 
-                  <label>Dirección</label>
-                  <input v-model="address.address"
-                          type="text"
-                          name="address"
-                          class="form-control"
-                          :class="{ 'is-invalid': form.errors.has('address') }">
-                  <has-error :form="form" field="address"></has-error>
+                <div class="form-group row">
+                  <div class="col-4">
+                    <label>Ciudad</label>
+                    <input v-model="address.city"
+                            type="text"
+                            name="city"
+                            class="form-control"
+                            :class="{ 'is-invalid': form.errors.has('city') }">
+                    <has-error :form="form" field="city"></has-error>
+                  </div>
+                  <div class="col-4">
+                    <label>Provincia</label>
+                    <select v-model="address.province_id"
+                            :class="{ 'is-invalid': form.errors.has('address.province_id') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
+                        <option value="address.province_id">{{ address.province.name }}</option>
+                    </select>
+                    <has-error :form="form" field="address.province"></has-error>
+                  </div>
+                  <div class="col-4">
+                    <label>País</label>
+                    <select v-model="address.country_id"
+                            :class="{ 'is-invalid': form.errors.has('address.country_id') }"
+                            class="form-control select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
+                        <option value="address.country_id">{{ address.country.name }}</option>
+                    </select>
+                    <has-error :form="form" field="address.country"></has-error>
+                  </div>
+                </div>
 
-                  <label>Código Postal</label>
-                  <input v-model="address.postcode"
-                          type="text"
-                          name="postcode"
-                          class="form-control"
-                          :class="{ 'is-invalid': form.errors.has('postcode') }">
-                  <has-error :form="form" field="postcode"></has-error>
-                
-                  <label>Ciudad</label>
-                  <input v-model="address.city"
-                          type="text"
-                          name="city"
-                          class="form-control"
-                          :class="{ 'is-invalid': form.errors.has('city') }">
-                  <has-error :form="form" field="city"></has-error>
-                  
-                  <label>Provincia</label>
-                  <select v-model="address.province_id"
-                          :class="{ 'is-invalid': form.errors.has('address.province_id') }"
-                          class="form-control select2 select2-danger"
-                          data-dropdown-css-class="select2-danger" style="width: 100%;">
-                      <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
-                      <option value="address.province_id">{{ address.province.name }}</option>
-                  </select>
-                  <has-error :form="form" field="address.province"></has-error>
-                  
-                  <label>País</label>
-                  <select v-model="address.country_id"
-                          :class="{ 'is-invalid': form.errors.has('address.country_id') }"
-                          class="form-control select2 select2-danger"
-                          data-dropdown-css-class="select2-danger" style="width: 100%;">
-                      <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
-                      <option value="address.country_id">{{ address.country.name }}</option>
-                  </select>
-                  <has-error :form="form" field="address.country"></has-error>
-
+                <has-error :form="form" field="customer.addresses"></has-error>
               </div>
               <has-error :form="form" field="customer.addresses"></has-error>
             </div>
@@ -353,30 +370,32 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
               <button :disabled="form.busy" type="submit" class="btn btn-primary">Guardar cambios</button>
             </div>
+
           </form>
         </div>
       </div>
     </div>
+
     <!-- Modal view -->
-    <div
-      class="modal fade"
+    <div class="modal fade "
       id="showModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="showModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="showModalLabel">#{{ form.id }} {{ form.firstname }} {{ form.lastname }}</h5>
-
+            <h5 class="modal-title" id="showModalLabel"># {{ form.firstname }} {{ form.lastname }}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <div class="modal-body">
-            <p><strong>· Empresa : {{ form.company }}</strong>
+
+            <p><strong>· Empresa : {{ form.company }}</strong></p>
             <p><strong>· Email :</strong> {{ form.email }}</p>
             <p><strong v-if="form.phone_1">· Teléfono 1: </strong>{{ form.phone_1 }}</p>
             <p><strong v-if="form.phone_2">· Teléfono 2 : </strong>{{ form.phone_2 }}</p>
@@ -384,16 +403,22 @@
             <p><strong v-if="form.vat_number">· VAT : </strong>{{ form.vat_number }}</p>
             <p><strong>· Fecha creación : </strong>{{ form.created_at }}</p>
             <p><strong>· Fecha modificación : </strong>{{ form.updated_at }}</p>
+            
+            
+            
+            
             <td v-if="form.addresses">
               <tr v-for="(address, index) in form.addresses" :key="address.id">
                 <p><strong>· {{ address.alias }}:</strong></p>
                 <p>&nbsp;&nbsp;&nbsp;{{ address.address }}. {{ address.postcode }} {{ address.city }} ({{ address.province.name }}). {{ address.country.name }}</p> 
               </tr>
             </td>
+            
             <td v-else>
                 Sin Dirección
             </td>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
@@ -406,6 +431,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
     mounted() {
         this.getData();
@@ -425,18 +452,18 @@ export default {
 
             form: new Form({
                 id: "",
-                firstname: "example",
-                lastname: "example",
-                company: "example",
-                email: "example@example.com",
+                firstname: "",
+                lastname: "",
+                company: "",
+                email: "",
                 phone_1: "",
-                phone_2: "662662662",
+                phone_2: "",
                 cif: "",
                 vat_number: "",
-                alias:"lalias",
-                address:"direccion",
-                postcode:"codigo postal",
-                city:"mi ciudad",
+                alias:"",
+                address:"",
+                postcode:"",
+                city:"",
                 province_id:"",
                 country_id:"",
                 addresses:[],
@@ -464,6 +491,10 @@ export default {
     computed: { },
 
     methods: {
+
+        moment: function () {
+            return moment();
+        },
 
         getProvinces() {
             axios.get("/api/provincias")
