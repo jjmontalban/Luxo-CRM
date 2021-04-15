@@ -11,11 +11,6 @@ class CountryController extends Controller
     public function index()
     {
         return new CountryCollection(Country::all());
-/* 
-        $provinces = Province::orderBy('id', 'desc')->get();
-        return response()->json([
-            "provinces_data" => $provinces
-        ], 200); */
     }
 
 }

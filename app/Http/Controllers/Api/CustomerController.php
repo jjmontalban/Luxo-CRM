@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Address;
 use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerCollection;
-use App\Http\Resources\CustomerResource;
+//use App\Http\Resources\CustomerResource;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -17,13 +18,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-/*         return new CustomerCollection(Customer::orderBy('id','DESC')->paginate(10));
- */
-      /*   $customers = Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50);
-        return response()->json([
-            "customers_data" => $customers
-        ], 200); */
-
         return new CustomerCollection(Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50));
     }
 
@@ -44,11 +38,17 @@ class CustomerController extends Controller
         $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
-            'company' => 'required',
             'email' => 'required|email|unique:customers',
-            'phone_1' => 'required|numeric',
+            'phone_1' => 'required|unique:customers',
+            'cif' => 'required|unique:customers',
+            'vat_number' => 'nullable|unique:customers',
+            'country_id' => 'required',
+            'province_id' => 'required',
             'address' => 'required',
+            'postcode' => 'required',
+            'city' => 'required',
         ]);
+
         $customer = new Customer();
         $customer->firstname = $request->firstname;
         $customer->lastname = $request->lastname;
@@ -56,9 +56,21 @@ class CustomerController extends Controller
         $customer->company = $request->company;
         $customer->phone_1 = $request->phone_1;
         $customer->phone_2 = $request->phone_2;
-        $customer->address = $request->address;
+        $customer->cif = $request->cif;
+        $customer->vat_number = $request->vat_number;
         $customer->save();
-        return new CustomerResource($customer);
+
+        $address = new Address();
+        $address->alias = $request->alias;
+        $address->address = $request->address;
+        $address->postcode = $request->postcode;
+        $address->city = $request->city;
+        $address->province_id = $request->province_id;
+        $address->country_id = $request->country_id;
+        $address->customer_id = $customer->id;
+        $address->save();
+
+        return new CustomerCollection($customer);
     }
 
     /**
@@ -67,10 +79,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /* public function show($id)
     {
         return new CustomerResource(Customer::findOrFail($id));
-    }
+    } */
 
     /**
      * Update the specified resource in storage.
@@ -85,9 +97,14 @@ class CustomerController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:customers,email,'.$id,
-            'phone_1' => 'required|numeric',
-            'phone_2' => 'numeric',
-            'address' => 'required',
+            'phone_1' => 'required|unique:customers,phone_1,'.$id,
+            'cif' => 'required|unique:customers,cif,'.$id,
+            'vat_number' => 'nullable|unique:customers,vat_number,'.$id,
+            'addresses.*.country_id' => 'required',
+            'addresses.*.province_id' => 'required',
+            'addresses.*.address' => 'required',
+            'addresses.*.postcode' => 'required',
+            'addresses.*.city' => 'required',
         ]);
 
         $customer = Customer::findOrfail($id);
@@ -97,10 +114,25 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->phone_1 = $request->phone_1;
         $customer->phone_2 = $request->phone_2;
-        $customer->address = $request->address;
+        $customer->cif = $request->cif;
+        $customer->vat_number = $request->vat_number;
         $customer->save();     
 
-        return new CustomerResource($customer);
+        //Direccion principal          
+       foreach($request->addresses as $addressData){
+
+            $address = Address::findOrfail($addressData['id']);
+            $address->alias = $addressData['alias'];
+            $address->address = $addressData['address'];
+            $address->postcode = $addressData['postcode'];
+            $address->city = $addressData['city'];;
+            $address->province_id = $addressData['province_id'];
+            $address->country_id = $addressData['country_id'];
+            $address->customer_id = $addressData['customer_id'];
+            $address->save();
+        }
+        
+       return new CustomerCollection($customer);
     }
 
     /**
@@ -113,6 +145,6 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrfail($id);
         $customer->delete();
-        return new CustomerResource($customer);
+        return new CustomerCollection($customer);
     }
 }

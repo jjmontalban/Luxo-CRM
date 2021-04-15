@@ -33,7 +33,7 @@
 <body>
 <div id="app">
     <div id="wrapper">
-        <front></front>
+        <admin-master></admin-master>
     </div>
 </div>
 

@@ -5104,9 +5104,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getData();
+    this.getProvinces();
+    this.getCountries();
     /* this.$store.dispatch("getProvince") */
   },
   data: function data() {
@@ -5118,18 +5217,21 @@ __webpack_require__.r(__webpack_exports__);
       provinces: [],
       countries: [],
       form: new Form({
+        id: "",
         firstname: "example",
         lastname: "example",
         company: "example",
         email: "example@example.com",
-        phone_1: "661661661",
+        phone_1: "",
         phone_2: "662662662",
-        cif: "662662662",
-        vat_number: "662662662",
-        created_at: "662662662",
-        updated_at: "662662662",
-        country: '',
-        province: '',
+        cif: "",
+        vat_number: "",
+        alias: "lalias",
+        address: "direccion",
+        postcode: "codigo postal",
+        city: "mi ciudad",
+        province_id: "",
+        country_id: "",
         addresses: []
       }),
       pagination: {
@@ -5149,7 +5251,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {},
-  computed: {
+  computed: {},
+  methods: {
     getProvinces: function getProvinces() {
       var _this = this;
 
@@ -5177,9 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
 
         console.log(e);
       });
-    }
-  },
-  methods: {
+    },
     getData: function getData() {
       var _this3 = this;
 
@@ -5963,6 +6064,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -90787,21 +90889,29 @@ var render = function() {
                             return _c("tr", { key: customer.id }, [
                               _c("td", [_vm._v(_vm._s(customer.id))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(customer.firstname) +
-                                    " " +
-                                    _vm._s(customer.lastname)
-                                )
-                              ]),
+                              customer.firstname && customer.lastname
+                                ? _c("td", [
+                                    _vm._v(
+                                      _vm._s(customer.firstname) +
+                                        " " +
+                                        _vm._s(customer.lastname)
+                                    )
+                                  ])
+                                : _c("td", [_vm._v("Sin datos")]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(customer.company))]),
+                              customer.company
+                                ? _c("td", [_vm._v(_vm._s(customer.company))])
+                                : _c("td", [_vm._v("Sin datos")]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(customer.email))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(customer.phone_1))]),
+                              customer.phone_1
+                                ? _c("td", [_vm._v(_vm._s(customer.phone_1))])
+                                : _c("td", [_vm._v("Sin datos")]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(customer.phone_2))]),
+                              customer.phone_2
+                                ? _c("td", [_vm._v(_vm._s(customer.phone_2))])
+                                : _c("td", [_vm._v("Sin datos")]),
                               _vm._v(" "),
                               customer.addresses
                                 ? _c(
@@ -90823,7 +90933,7 @@ var render = function() {
                                           _vm._v(_vm._s(address.city))
                                         ]),
                                         _vm._v(" "),
-                                        address.province.name
+                                        address.province
                                           ? _c("td", [
                                               _vm._v(
                                                 _vm._s(address.province.name)
@@ -90831,7 +90941,7 @@ var render = function() {
                                             ])
                                           : _vm._e(),
                                         _vm._v(" "),
-                                        address.country.name
+                                        address.country
                                           ? _c("td", [
                                               _vm._v(
                                                 _vm._s(address.country.name)
@@ -91231,140 +91341,336 @@ var render = function() {
                           "div",
                           { staticClass: "form-group" },
                           [
-                            _c(
+                            _c("label", [_vm._v("CIF")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.cif,
+                                  expression: "form.cif"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("cif")
+                              },
+                              attrs: { type: "text", name: "cif" },
+                              domProps: { value: _vm.form.cif },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.form, "cif", $event.target.value)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "cif" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("VAT number")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.vat_number,
+                                  expression: "form.vat_number"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("vat_number")
+                              },
+                              attrs: { type: "text", name: "vat_number" },
+                              domProps: { value: _vm.form.vat_number },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "vat_number",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "vat_number" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        !_vm.editMode
+                          ? _c(
                               "div",
-                              { staticClass: "form-group" },
                               [
-                                _c("label", [_vm._v("Dirección")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.addresses.address,
-                                      expression: "form.addresses.address"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "addresses.address"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "text",
-                                    name: "addresses.address"
-                                  },
-                                  domProps: {
-                                    value: _vm.form.addresses.address
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", [_vm._v("Alias de dirección")]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.alias,
+                                          expression: "form.alias"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "alias"
+                                        )
+                                      },
+                                      attrs: { type: "text", name: "alias" },
+                                      domProps: { value: _vm.form.alias },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "alias",
+                                            $event.target.value
+                                          )
+                                        }
                                       }
-                                      _vm.$set(
-                                        _vm.form.addresses,
-                                        "address",
-                                        $event.target.value
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "alias" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", [_vm._v("Dirección")]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.address,
+                                          expression: "form.address"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "address"
+                                        )
+                                      },
+                                      attrs: { type: "text", name: "address" },
+                                      domProps: { value: _vm.form.address },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "address",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: {
+                                        form: _vm.form,
+                                        field: "address"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", [_vm._v("Código Postal")]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.postcode,
+                                          expression: "form.postcode"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "postcode"
+                                        )
+                                      },
+                                      attrs: { type: "text", name: "postcode" },
+                                      domProps: { value: _vm.form.postcode },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "postcode",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: {
+                                        form: _vm.form,
+                                        field: "postcode"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", [_vm._v("Ciudad")]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.city,
+                                          expression: "form.city"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "city"
+                                        )
+                                      },
+                                      attrs: { type: "text", name: "city" },
+                                      domProps: { value: _vm.form.city },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "city",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "city" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("label", [_vm._v("Provincia")]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.province_id,
+                                        expression: "form.province_id"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "form-control select2 select2-danger",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "province_id"
                                       )
+                                    },
+                                    staticStyle: { width: "100%" },
+                                    attrs: {
+                                      "data-dropdown-css-class":
+                                        "select2-danger"
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "province_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
                                     }
-                                  }
-                                }),
+                                  },
+                                  [
+                                    _vm._l(_vm.provinces, function(province) {
+                                      return _c(
+                                        "option",
+                                        { domProps: { value: province.id } },
+                                        [_vm._v(_vm._s(province.name))]
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "" } }, [
+                                      _vm._v("Elegir una")
+                                    ])
+                                  ],
+                                  2
+                                ),
                                 _vm._v(" "),
                                 _c("has-error", {
                                   attrs: {
                                     form: _vm.form,
-                                    field: "addresses.address"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("label", [_vm._v("Código Postal")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.addresses.postcode,
-                                      expression: "form.addresses.postcode"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "addresses.postcode"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "text",
-                                    name: "addresses.postcode"
-                                  },
-                                  domProps: {
-                                    value: _vm.form.addresses.postcode
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form.addresses,
-                                        "postcode",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "addresses.postcode"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("label", [_vm._v("Cuidad")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.addresses.city,
-                                      expression: "form.addresses.city"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "addresses.postcode"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "text",
-                                    name: "addresses.city"
-                                  },
-                                  domProps: { value: _vm.form.addresses.city },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form.addresses,
-                                        "city",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "addresses.city"
+                                    field: "province_id"
                                   }
                                 }),
                                 _vm._v(" "),
@@ -91377,15 +91683,15 @@ var render = function() {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.form.country,
-                                        expression: "form.country"
+                                        value: _vm.form.country_id,
+                                        expression: "form.country_id"
                                       }
                                     ],
                                     staticClass:
                                       "form-control select2 select2-danger",
                                     class: {
                                       "is-invalid": _vm.form.errors.has(
-                                        "country"
+                                        "country_id"
                                       )
                                     },
                                     staticStyle: { width: "100%" },
@@ -91408,7 +91714,7 @@ var render = function() {
                                           })
                                         _vm.$set(
                                           _vm.form,
-                                          "country",
+                                          "country_id",
                                           $event.target.multiple
                                             ? $$selectedVal
                                             : $$selectedVal[0]
@@ -91417,111 +91723,296 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c(
-                                      "option",
-                                      { attrs: { disabled: "", value: "" } },
-                                      [_vm._v("Elegir una")]
-                                    ),
-                                    _vm._v(" "),
                                     _vm._l(_vm.countries, function(country) {
                                       return _c(
                                         "option",
                                         { domProps: { value: country.id } },
                                         [_vm._v(_vm._s(country.name))]
                                       )
-                                    })
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "country" }
-                                }),
-                                _vm._v(" "),
-                                _c("label", [_vm._v("Provincia")]),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.province,
-                                        expression: "form.province"
-                                      }
-                                    ],
-                                    staticClass:
-                                      "form-control select2 select2-danger",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has(
-                                        "province"
-                                      )
-                                    },
-                                    staticStyle: { width: "100%" },
-                                    attrs: {
-                                      "data-dropdown-css-class":
-                                        "select2-danger"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "province",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      { attrs: { disabled: "", value: "" } },
-                                      [_vm._v("Elegir una")]
-                                    ),
+                                    }),
                                     _vm._v(" "),
-                                    _vm._l(_vm.provinces, function(province) {
-                                      return _c(
-                                        "option",
-                                        { domProps: { value: province.id } },
-                                        [_vm._v(_vm._s(province.name))]
-                                      )
-                                    })
+                                    _c("option", { attrs: { value: "" } }, [
+                                      _vm._v("Elegir uno")
+                                    ])
                                   ],
                                   2
                                 ),
                                 _vm._v(" "),
                                 _c("has-error", {
-                                  attrs: { form: _vm.form, field: "province" }
+                                  attrs: { form: _vm.form, field: "country_id" }
                                 })
                               ],
                               1
-                            ),
-                            _vm._v(" "),
-                            _c("has-error", {
-                              attrs: {
-                                form: _vm.form,
-                                field: "customer.addresses"
-                              }
-                            })
-                          ],
-                          1
-                        )
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm._l(_vm.form.addresses, function(address, index) {
+                          return _c(
+                            "div",
+                            { key: address.id },
+                            [
+                              _c("h4", { attrs: { align: "center" } }, [
+                                _vm._v(_vm._s(address.alias))
+                              ]),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("Dirección")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: address.address,
+                                    expression: "address.address"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("address")
+                                },
+                                attrs: { type: "text", name: "address" },
+                                domProps: { value: address.address },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      address,
+                                      "address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "address" }
+                              }),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("Código Postal")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: address.postcode,
+                                    expression: "address.postcode"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("postcode")
+                                },
+                                attrs: { type: "text", name: "postcode" },
+                                domProps: { value: address.postcode },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      address,
+                                      "postcode",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "postcode" }
+                              }),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("Ciudad")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: address.city,
+                                    expression: "address.city"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("city")
+                                },
+                                attrs: { type: "text", name: "city" },
+                                domProps: { value: address.city },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      address,
+                                      "city",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "city" }
+                              }),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("Provincia")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: address.province_id,
+                                      expression: "address.province_id"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "form-control select2 select2-danger",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "address.province_id"
+                                    )
+                                  },
+                                  staticStyle: { width: "100%" },
+                                  attrs: {
+                                    "data-dropdown-css-class": "select2-danger"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        address,
+                                        "province_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._l(_vm.provinces, function(province) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: province.id } },
+                                      [_vm._v(_vm._s(province.name))]
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "address.province_id" } },
+                                    [_vm._v(_vm._s(address.province.name))]
+                                  )
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field: "address.province"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("País")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: address.country_id,
+                                      expression: "address.country_id"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "form-control select2 select2-danger",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "address.country_id"
+                                    )
+                                  },
+                                  staticStyle: { width: "100%" },
+                                  attrs: {
+                                    "data-dropdown-css-class": "select2-danger"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        address,
+                                        "country_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._l(_vm.countries, function(country) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: country.id } },
+                                      [_vm._v(_vm._s(country.name))]
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "address.country_id" } },
+                                    [_vm._v(_vm._s(address.country.name))]
+                                  )
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field: "address.country"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "customer.addresses" }
+                        })
                       ],
-                      1
+                      2
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-footer" }, [
@@ -91617,7 +92108,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("p", [
-                    _c("strong", [_vm._v("· CIF :")]),
+                    _vm.form.cif ? _c("strong", [_vm._v("· CIF :")]) : _vm._e(),
                     _vm._v(" " + _vm._s(_vm.form.cif))
                   ]),
                   _vm._v(" "),
@@ -91645,9 +92136,7 @@ var render = function() {
                           return _c("tr", { key: address.id }, [
                             _c("p", [
                               _c("strong", [
-                                _vm._v(
-                                  "· Dirección " + _vm._s(address.alias) + ":"
-                                )
+                                _vm._v("· " + _vm._s(address.alias) + ":")
                               ])
                             ]),
                             _vm._v(" "),

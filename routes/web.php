@@ -11,14 +11,9 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('frontend.frontendMaster');
-});*/
+/* Route::view('/','frontend.frontendMaster')->name('frontEnd'); */
+Route::view('/','auth.login')->name('login');
 
-
-Route::view('/','frontend.frontendMaster')->name('frontEnd');
-//Route::view('/{path}','frontend.frontendMaster')->where('path','.*');
-//Route::get('/{anypath}', 'HomeController@index')->where('path','.*');
 
 
 Auth::routes();

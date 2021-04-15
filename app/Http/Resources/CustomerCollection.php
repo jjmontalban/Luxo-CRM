@@ -12,23 +12,6 @@ class CustomerCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    /* public function toArray($request)
-    {
-        return [
-            'data' => $this->collection->transform(function ($customer){
-                return [
-                    'id' => $customer->id,
-                    'firstname' => $customer->firstname,
-                    'lastname' => $customer->lastname,
-                    'company' => $customer->company,
-                    'email' => $customer->email,
-                    'phone_1' => $customer->phone_1,
-                    'phone_2' => $customer->phone_2,
-                    'address' => $customer->address,
-                ];
-            })
-        ];
-    } */
 
     public function toArray($request)
     {
