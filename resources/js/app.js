@@ -69,11 +69,11 @@ window.Toast = Toast
 // Vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
-import storeData from './store/index'
+import storeData from './_store/index'
 
 const store = new Vuex.Store(
     storeData
-)
+) 
 
 
 // moment and filter

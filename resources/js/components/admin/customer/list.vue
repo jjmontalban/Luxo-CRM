@@ -390,7 +390,6 @@ export default {
         this.getData();
         this.getProvinces();
         this.getCountries();
-        /* this.$store.dispatch("getProvince") */
     },
     data() {
         return {
