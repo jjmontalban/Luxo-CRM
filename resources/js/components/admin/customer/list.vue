@@ -73,16 +73,14 @@
                     <td v-else>
                         Sin dirección
                     </td>
-                        <td class="text-center">
-                      <button type="button" @click="show(customer)" class="btn btn-info btn-sm">
-                        <i class="fas fa-eye"></i>
-                      </button>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-primary btn-sm">
+                          <router-link :to="`/cliente/${customer.id}`"><i class="fas fa-eye"></i></router-link>
+                        </button>
                       <button type="button" @click="edit(customer)" class="btn btn-primary btn-sm">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button type="button" @click="destroy(customer)"
-                        class="btn btn-danger btn-sm"
-                      >
+                      <button type="button" @click="destroy(customer)" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </td>
@@ -337,6 +335,7 @@
                             :class="{ 'is-invalid': form.errors.has('city') }">
                     <has-error :form="form" field="city"></has-error>
                   </div>
+
                   <div class="col-4">
                     <label>Provincia</label>
                     <select v-model="address.province_id"
@@ -348,6 +347,7 @@
                     </select>
                     <has-error :form="form" field="address.province"></has-error>
                   </div>
+
                   <div class="col-4">
                     <label>País</label>
                     <select v-model="address.country_id"
@@ -376,55 +376,6 @@
       </div>
     </div>
 
-    <!-- Modal view -->
-    <div class="modal fade "
-      id="showModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="showModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="showModalLabel"># {{ form.firstname }} {{ form.lastname }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-
-            <p><strong>· Empresa : {{ form.company }}</strong></p>
-            <p><strong>· Email :</strong> {{ form.email }}</p>
-            <p><strong v-if="form.phone_1">· Teléfono 1: </strong>{{ form.phone_1 }}</p>
-            <p><strong v-if="form.phone_2">· Teléfono 2 : </strong>{{ form.phone_2 }}</p>
-            <p><strong v-if="form.cif">· CIF :</strong> {{ form.cif }}</p>
-            <p><strong v-if="form.vat_number">· VAT : </strong>{{ form.vat_number }}</p>
-            <p><strong>· Fecha creación : </strong>{{ form.created_at }}</p>
-            <p><strong>· Fecha modificación : </strong>{{ form.updated_at }}</p>
-            
-            
-            
-            
-            <td v-if="form.addresses">
-              <tr v-for="(address, index) in form.addresses" :key="address.id">
-                <p><strong>· {{ address.alias }}:</strong></p>
-                <p>&nbsp;&nbsp;&nbsp;{{ address.address }}. {{ address.postcode }} {{ address.city }} ({{ address.province.name }}). {{ address.country.name }}</p> 
-              </tr>
-            </td>
-            
-            <td v-else>
-                Sin Dirección
-            </td>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
     <vue-progress-bar></vue-progress-bar>
     <vue-snotify></vue-snotify>
   </div>
@@ -434,6 +385,7 @@
 import moment from 'moment'
 
 export default {
+    name: 'CustomerList',
     mounted() {
         this.getData();
         this.getProvinces();
@@ -491,10 +443,6 @@ export default {
     computed: { },
 
     methods: {
-
-        moment: function () {
-            return moment();
-        },
 
         getProvinces() {
             axios.get("/api/provincias")

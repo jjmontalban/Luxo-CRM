@@ -74,8 +74,9 @@
 
                     <div class="row mb-2">
                       <div class="col-md-3 text-muted">Teléfonos:</div>
-                      <div v-if="customer.phone_1" class="col-md-4">{{ customer.phone_1 }}</div>
-                      <div v-if="customer.phone_2" class="col-md-5">| {{ customer.phone_2 }}</div>
+                      <div v-if="customer.phone_1" class="col-md-3">{{ customer.phone_1 }}</div>
+                      <div v-if="customer.phone_2" class="col-md-1"> | </div>
+                      <div v-if="customer.phone_2" class="col-md-4">{{ customer.phone_2 }}</div>
                     </div>
 
                     <h6 class="my-3">Información Fiscal</h6>
@@ -116,8 +117,35 @@
                 </div>
                 <!-- / Info -->
 
-               
+                <!-- / Direcciones -->
+                <div v-for="(address, index) in customer.addresses" :key="address.id">
+                    <div class="card mb-4">
+                      <div class="card-body">
 
+                        <div class="row mb-2">
+                          <div v-if="address.alias" class="col-md-12 text-muted"><strong>{{ address.alias }}</strong></div>
+                        </div>
+
+                        <div class="row mb-2">
+                          <div v-if="address.address" class="col-md-12">{{ address.address }}. ({{ address.city }}. {{ address.postcode }} ({{ address.province.name }}). {{ address.country.name }}</div> 
+                        </div>
+
+                      </div>
+                      <div class="card-footer text-center p-0">
+                        <div class="row no-gutters row-bordered row-border-light">
+                          <div class="d-flex col flex-column text-body py-3">
+                            <div class="font-weight-bold"></div>
+                            <div class="text-muted small"></div>
+                          </div>
+                          <div class="d-flex col flex-column text-body py-3">
+                            <div class="font-weight-bold"></div>
+                            <div class="text-muted small"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              
               </div>
               <div class="col-xl-4">
 

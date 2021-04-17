@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerCollection;
 //use App\Http\Resources\CustomerResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -19,6 +20,17 @@ class CustomerController extends Controller
     public function index()
     {
         return new CustomerCollection(Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50));
+    }
+
+    
+    /**
+     * Display the customer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       return Customer::where('id',$id)->with('addresses')->first();
     }
 
     public function search($field,$query)
