@@ -36,9 +36,9 @@
         <div class="row">
           <div class="col">               
             <!-- Info -->
-            <h3>Información Personal</h3>
+            
             <div class="card mb-4">
-
+              <div class="card-header">Información Personal</div>
               <div class="card-body">
                 <div class="row mb-2">
                   <div class="col-md-3 text-muted">Empresa:</div>
@@ -58,7 +58,7 @@
                   <div v-if="customer.phone_2" class="col-md-4">{{ customer.phone_2 }}</div>
                 </div>
 
-                <h6 class="my-3">Información Fiscal</h6>
+                <h6 class="my-3 font-weight-bold mb-4">Información Fiscal</h6>
 
                 <div v-if="customer.cif" class="row mb-2">
                   <div class="col-md-3 text-muted">CIF:</div>
@@ -69,7 +69,7 @@
                   <div class="col-md-9">{{ customer.vat_number }}</div>
                 </div>
 
-                <h6 class="my-3">Actividad</h6>
+                <h6 class="my-3 font-weight-bold mb-4">Actividad</h6>
 
                 <div class="row mb-2">
                   <div class="col-md-3 text-muted">Cliente desde:</div>
@@ -81,46 +81,18 @@
                 </div>
                 
               </div>
-              <div class="card-footer text-center p-0">
-                <div class="row no-gutters row-bordered row-border-light">
-                  <div class="d-flex col flex-column text-body py-3">
-                    <div class="font-weight-bold">24</div>
-                    <div class="text-muted small">compras</div>
-                  </div>
-                  <div class="d-flex col flex-column text-body py-3">
-                    <div class="font-weight-bold">2.240€</div>
-                    <div class="text-muted small">gastados</div>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- / Info -->
 
             <!-- / Direcciones -->
-            <h3>Direcciones</h3>
             <div v-for="(address, index) in customer.addresses" :key="address.id">
                 <div class="card mb-4">
+                  <div class="card-header" v-if="address.alias">
+                    Dirección {{ index+1 }}: {{ address.alias }}
+                  </div>
                   <div class="card-body">
-
-                    <div class="row mb-2">
-                      <div v-if="address.alias" class="col-md-12 text-muted"><strong>{{ address.alias }}</strong></div>
-                    </div>
-
                     <div class="row mb-2">
                       <div v-if="address.address" class="col-md-12">{{ address.address }}. ({{ address.city }}. {{ address.postcode }} ({{ address.province.name }}). {{ address.country.name }}</div> 
-                    </div>
-
-                  </div>
-                  <div class="card-footer text-center p-0">
-                    <div class="row no-gutters row-bordered row-border-light">
-                      <div class="d-flex col flex-column text-body py-3">
-                        <div class="font-weight-bold"></div>
-                        <div class="text-muted small"></div>
-                      </div>
-                      <div class="d-flex col flex-column text-body py-3">
-                        <div class="font-weight-bold"></div>
-                        <div class="text-muted small"></div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -191,11 +163,6 @@
 
       </div>
 
-      <!-- /.card-body -->
-      <div class="card-footer">
-          
-      </div>
-      <!-- /.card-footer-->
   </div>
 </template>
 
