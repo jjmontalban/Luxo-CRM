@@ -3,23 +3,23 @@
     <nav aria-label="...">
         <ul class="pagination justify-content-center">
             <li class="page-item" :class="{ disabled: pagination.current_page <= 1 }">
-                <a class="page-link" @click.prevent="changePage(1)"  >Start</a>
+                <a class="page-link" @click.prevent="changePage(1)"  >Inicio</a>
             </li>
             <li class="page-item" :class="{ disabled: pagination.current_page <= 1 }">
-                <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)">Previous</a>
+                <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)">Anterior</a>
             </li>
 
             <li class="page-item" v-for="page in pages"  :key="page" :class="isCurrentPage(page) ? 'active' : ''">
                 <a class="page-link" @click.prevent="changePage(page)">{{ page }}
-                    <span v-if="isCurrentPage(page)" class="sr-only">(current)</span>
+                    <span v-if="isCurrentPage(page)" class="sr-only">(actual)</span>
                 </a>
             </li>
 
             <li class="page-item" :class="{ disabled: pagination.current_page >= pagination.last_page }">
-                <a class="page-link" @click.prevent="changePage(pagination.current_page + 1)">Next</a>
+                <a class="page-link" @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
             </li>
             <li class="page-item" :class="{ disabled: pagination.current_page >= pagination.last_page }">
-                <a class="page-link" @click.prevent="changePage(pagination.last_page)">End</a>
+                <a class="page-link" @click.prevent="changePage(pagination.last_page)">Último</a>
             </li>
         </ul>
     </nav>

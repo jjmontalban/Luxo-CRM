@@ -20,10 +20,10 @@
           <div class="card-body">
             <div class="mb-3">
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <strong>Buscar por :</strong>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-1">
                   <select v-model="queryFiled" class="form-control" id="fileds">
                     <option value="firstname">Nombre</option>
                     <option value="lastname">Apellidos</option>
@@ -31,10 +31,10 @@
                     <option value="email">Email</option>
                     <option value="phone_1">Telefono 1</option>
                     <option value="phone_2">Telefono 2</option>
-                    <option value="address">Dirección</option>
+                    <option value="provincia">Provincia</option>
                   </select>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-4">
                   <input v-model="query" type="text" class="form-control" placeholder="Buscar...">
                 </div>
               </div>
