@@ -3,7 +3,6 @@ window.Vue = require('vue');
 
 
 Vue.component('admin-master', require('./components/admin/adminMaster.vue').default);
-Vue.component('front', require('./components/frontend/frontendMaster').default);
 Vue.component('pagination', require('./components/partial/PaginationComponent').default);
 
 //snotify
@@ -65,17 +64,6 @@ const Toast = Swal.mixin({
 })
 window.Toast = Toast
 
-
-// Vuex
-import Vuex from 'vuex'
-Vue.use(Vuex)
-import storeData from './_store/index'
-
-const store = new Vuex.Store(
-    storeData
-) 
-
-
 // moment and filter
 import {filter} from './filter'
 
@@ -88,5 +76,4 @@ Vue.use(Editor);
 const app = new Vue({
     el: '#app',
     router,
-    store
 });

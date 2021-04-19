@@ -73,10 +73,8 @@
                     <td v-else>
                         Sin dirección
                     </td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-primary btn-sm">
-                          <router-link :to="`/cliente/${customer.id}`"><i class="fas fa-eye"></i></router-link>
-                        </button>
+                    <td class="text-center">
+                      <router-link :to="`/cliente/${customer.id}`" class="btn btn-primary btn-sm" tag="button"><i class="fas fa-eye"></i></router-link>
                       <button type="button" @click="edit(customer)" class="btn btn-primary btn-sm">
                         <i class="fas fa-edit"></i>
                       </button>

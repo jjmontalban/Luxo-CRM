@@ -27,7 +27,7 @@
                     <img src="{{asset('photo/adminimage.jpg')}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <router-link to="/home" class="d-block">{{auth::user()->email}}</router-link>
+                    <a href="" class="d-block">{{auth::user()->email}}</a>
                 </div>
             </div>
 
@@ -45,8 +45,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Salir') }}
+                           document.getElementById('logout-form').submit();">
+                           {{ __('Salir') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -70,7 +70,7 @@
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.0
+            <b>Version</b> 1.1
         </div>
         <strong>Copyright &copy; 2020 <a href="https://galacticblum.com">Galacticblum</a>.</strong> .
     </footer>
