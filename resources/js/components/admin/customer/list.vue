@@ -34,8 +34,13 @@
                     <option value="provincia">Provincia</option>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <input v-model="query" type="text" class="form-control" placeholder="Buscar...">
+                </div>
+                <div class="col-md-3">
+                  <export-excel  class="btn btn-success" :data="this.customers" :fields = "json_fields" name="clientes.xls">
+                      EXPORTAR LISTA
+                  </export-excel>                
                 </div>
               </div>
             </div>
@@ -43,7 +48,6 @@
               <table class="table table-hover table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nombre y apellidos</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Email</th>
@@ -55,7 +59,6 @@
                 </thead>
                 <tbody>
                   <tr v-for="(customer, index) in customers" :key="customer.id">
-                    <td>{{ customer.id }}</td>
                     <td v-if="customer.firstname && customer.lastname">{{ customer.firstname}} {{ customer.lastname}}</td><td v-else>Sin datos</td>
                     <td v-if="customer.company">{{ customer.company}}</td><td v-else>Sin datos</td>
                     <td>{{ customer.email }}</td>
@@ -384,6 +387,7 @@ import moment from 'moment'
 
 export default {
     name: 'CustomerList',
+
     mounted() {
         this.getData();
         this.getProvinces();
@@ -391,13 +395,13 @@ export default {
     },
     data() {
         return {
+
             editMode: false,
             query: "",
             queryFiled: "firstname",
             customers: [],
             provinces:[],
             countries:[],
-
 
             form: new Form({
                 id: "",
@@ -416,11 +420,37 @@ export default {
                 province_id:"",
                 country_id:"",
                 addresses:[],
-
                 }),
+
             pagination: {
                 current_page: 1
+                },
+
+            json_fields: {
+              'Nombre': 'firstname',
+              'Apellidos': 'lastname',
+              'Empresa': 'company',
+              'Email': 'email',
+              'telefono 1': 'phone_1',
+              'telefono 2': 'phone_2',
+              'Dirección': 'addresses.0.address',
+              'Ciudad': 'addresses.0.city',
+              'Codigo Postal': 'addresses.0.postcode',
+              'Provincia': 'addresses.0.province.name',
+              'País': 'addresses.0.country.name',
+              'cif': 'cif',
+              'vat': 'vat_number',
+              'fecha de creación': 'created_at',
+              'fecha de modificación': 'updated_at',
+            },
+            json_meta: [
+            [
+                {
+                    'key': 'charset',
+                    'value': 'utf-8'
                 }
+            ]
+        ],
             };
         },
 

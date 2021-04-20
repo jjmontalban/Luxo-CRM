@@ -32,9 +32,10 @@
         "sweetalert2": "^10.0.2",
         "v-markdown-editor": "^1.2.6",
         "vform": "^1.0.1",
-        "vue-router": "^3.4.3",
-        "vuex": "^3.5.1",
+        "vue-excel-export": "^0.1.3",
         "vue-progressbar": "^0.7.5",
-        "vue-snotify": "^3.2.1"
+        "vue-router": "^3.4.3",
+        "vue-snotify": "^3.2.1",
+        "vuex": "^3.5.1"
     }
 }

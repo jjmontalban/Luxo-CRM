@@ -19,7 +19,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return new CustomerCollection(Customer::with('addresses')->orderBy('id', 'DESC')->paginate(50));
+        return new CustomerCollection(Customer::with('addresses')->orderBy('id', 'DESC')->paginate(500));
     }
 
     
@@ -36,7 +36,7 @@ class CustomerController extends Controller
     public function search($field,$query)
     {
         $query= trim($query);
-        return new CustomerCollection(Customer::where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(5));    
+        return new CustomerCollection(Customer::where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));    
     }
 
     /**

@@ -20,6 +20,10 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+// excel
+import excel from 'vue-excel-export'
+Vue.use(excel)
+
 //progress bar
 import VueProgressBar from 'vue-progressbar'
 const VueProgressBarOptions = {
