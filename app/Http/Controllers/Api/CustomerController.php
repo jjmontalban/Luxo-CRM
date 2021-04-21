@@ -36,7 +36,7 @@ class CustomerController extends Controller
     public function search($field,$query)
     {
         $query= trim($query);
-        return new CustomerCollection(Customer::where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));    
+        return new CustomerCollection(Customer::with('addresses')->where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));    
     }
 
     /**
