@@ -38,7 +38,7 @@ class ProvincesTableSeeder extends Seeder
                 [
                     'id' => 56,
                     'country_id' => 6,
-                    'name' => 'Alicante',
+                    'name' => 'Almería',
                     'iso_code' => 'AL',
                 ],
                 [
