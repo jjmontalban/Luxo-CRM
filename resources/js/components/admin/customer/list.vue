@@ -29,7 +29,7 @@
                     <option value="lastname">Apellidos</option>
                     <option value="company">Empresa</option>
                     <option value="email">Email</option>
-                    <option value="phone_1">Telefono 1</option>
+                    <option value="phone_1">Telefonos 1</option>
                     <option value="phone_2">Telefono 2</option>
                     <option value="provincia">Provincia</option>
                   </select>
@@ -48,29 +48,32 @@
               <table class="table table-hover table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre y apellidos</th>
-                    <th scope="col">Empresa</th>
+                    <th scope="col">Empresa (Nombre y apellidos)</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Telefono 1</th>
-                    <th scope="col">Telefono 2</th>
+                    <th scope="col">Teléfonos</th>
                     <th scope="col">Dirección</th>
                     <th scope="col" class="text-center">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(customer, index) in customers" :key="customer.id">
-                    <td v-if="customer.firstname && customer.lastname">{{ customer.firstname}} {{ customer.lastname}}</td><td v-else>Sin datos</td>
-                    <td v-if="customer.company">{{ customer.company}}</td><td v-else>Sin datos</td>
+                    <td> 
+                      <tr v-if="customer.company">{{ customer.company}}</tr>
+                      <tr v-else-if="customer.firstname">{{ customer.firstname}}</tr>
+                      <tr v-if="customer.lastname">{{ customer.lastname}}</tr>
+                    </td>
                     <td>{{ customer.email }}</td>
-                    <td v-if="customer.phone_1">{{ customer.phone_1 }}</td><td v-else>Sin datos</td>
-                    <td v-if="customer.phone_2">{{ customer.phone_2 }}</td><td v-else>Sin datos</td>
+                    <td>
+                      <tr v-if="customer.phone_1">{{ customer.phone_1 }}</tr>
+                      <tr v-if="customer.phone_2">{{ customer.phone_2 }}</tr>
+                    </td>
                     <td v-if="customer.addresses">
                         <tr v-for="(address, index) in customer.addresses" :key="address.id">
                           <td>{{ address.address }}</td>
                           <td>{{ address.postcode }}</td>
                           <td>{{ address.city }}</td>
                           <td v-if="address.province">{{ address.province.name }}</td>
-                          <td v-if="address.country">{{ address.country.name }}</td>
+                          <td v-if="address.country && address.country.id != 6">{{ address.country.name }}</td>
                        </tr>
                     </td> 
                     <td v-else>

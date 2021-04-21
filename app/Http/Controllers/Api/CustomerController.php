@@ -47,7 +47,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        /* $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:customers',
@@ -59,7 +59,7 @@ class CustomerController extends Controller
             'address' => 'required',
             'postcode' => 'required',
             'city' => 'required',
-        ]);
+        ]); */
 
         $customer = new Customer();
         $customer->firstname = $request->firstname;
@@ -105,7 +105,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        /* $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:customers,email,'.$id,
@@ -117,7 +117,7 @@ class CustomerController extends Controller
             'addresses.*.address' => 'required',
             'addresses.*.postcode' => 'required',
             'addresses.*.city' => 'required',
-        ]);
+        ]); */
 
         $customer = Customer::findOrfail($id);
         $customer->firstname = $request->firstname;

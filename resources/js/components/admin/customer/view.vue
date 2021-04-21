@@ -16,9 +16,19 @@
         <div class="mb-4">
           <div class="py-5">
             <div class="ml-4">
-              <h2 class="font-weight-bold mb-4">{{ customer.firstname }} {{ customer.lastname }}</h2>
+              <h5 v-if="customer.company">
+                <span class="font-weight-bold mb-4">{{ customer.company }}</span>
+              </h5>
+              <h5 v-else>
+                <span v-if="customer.firstname" class="font-weight-bold mb-4">{{ customer.firstname }}</span>
+                <span v-if="customer.lastname" class="font-weight-bold mb-4">{{ customer.lastname }}</span>
+              </h5>
               <div class="text-muted">
-                <h5 class="font-weight-bold mb-4">{{ mainAddress.city }} ({{ mainAddress.province.name }}). {{ mainAddress.country.name }}</h5>
+                <h5>
+                  <span v-if="mainAddress.city" class="font-weight-bold mb-4">{{ mainAddress.city }}</span>
+                  <span v-if="mainAddress.province" class="font-weight-bold mb-4">({{ mainAddress.province.name }})</span>
+                  <span v-if="mainAddress.country" class="font-weight-bold mb-4">. {{ mainAddress.country.name }}</span>
+                </h5>
               </div>
               <div class="text-muted">
                 <a href="#" class="d-inline-block text-body">
@@ -40,21 +50,21 @@
             <div class="card mb-4">
               <div class="card-header">Información Personal</div>
               <div class="card-body">
-                <div class="row mb-2">
+
+                <div v-if="customer.company" class="row mb-2">
                   <div class="col-md-3 text-muted">Empresa:</div>
-                  <div v-if="customer.company" class="col-md-4">{{ customer.company }}</div> 
-                  <div class="col-md-5">({{ customer.firstname }} {{ customer.lastname }})</div> 
+                  <div class="col-md-4">{{ customer.company }}</div> 
                 </div>
 
-                <div class="row mb-2">
+                <div v-if="customer.email" class="row mb-2">
                   <div class="col-md-3 text-muted">Email:</div>
                   <div class="col-md-9">{{ customer.email }}</div>
                 </div>
 
-                <div class="row mb-2">
+                <div v-if="customer.phone_1 || customer.phone_2" class="row mb-2">
                   <div class="col-md-3 text-muted">Teléfonos:</div>
                   <div v-if="customer.phone_1" class="col-md-3">{{ customer.phone_1 }}</div>
-                  <div v-if="customer.phone_2" class="col-md-1"> | </div>
+                  <div v-if="customer.phone_1 && customer.phone_2" class="col-md-1"> | </div>
                   <div v-if="customer.phone_2" class="col-md-4">{{ customer.phone_2 }}</div>
                 </div>
 
@@ -62,7 +72,7 @@
 
                 <div v-if="customer.cif" class="row mb-2">
                   <div class="col-md-3 text-muted">CIF:</div>
-                  <div class="col-md-9">{{ customer.cif }}</div>
+                  <div class="col-md-3">{{ customer.cif }}</div>
                 </div>
                 <div v-if="customer.vat_number" class="row mb-2">
                   <div class="col-md-3 text-muted">VAT:</div>
@@ -71,11 +81,11 @@
 
                 <h6 class="my-3 font-weight-bold mb-4">Actividad</h6>
 
-                <div class="row mb-2">
+                <div v-if="customer.created_at" class="row mb-2">
                   <div class="col-md-3 text-muted">Cliente desde:</div>
                   <div class="col-md-9">{{ customer.created_at }}</div>
                 </div>
-                <div class="row mb-2">
+                <div v-if="customer.updated_at" class="row mb-2">
                   <div class="col-md-3 text-muted">última edición:</div>
                   <div class="col-md-9">Hace 4 meses</div>
                 </div>
@@ -91,9 +101,11 @@
                     Dirección {{ index+1 }}: {{ address.alias }}
                   </div>
                   <div class="card-body">
-                    <div class="row mb-2">
-                      <div v-if="address.address" class="col-md-12">{{ address.address }}. ({{ address.city }}. {{ address.postcode }} ({{ address.province.name }}). {{ address.country.name }}</div> 
-                    </div>
+                      <span v-if="address.address">{{ address.address }}</span> 
+                      <span v-if="address.city">. {{ address.city }}</span> 
+                      <span v-if="address.postcode">. {{ address.postcode }}</span> 
+                      <span v-if="address.province">. ({{ address.province.name }})</span> 
+                      <span v-if="address.country">. {{ address.country.name }}</span> 
                   </div>
                 </div>
             </div>
