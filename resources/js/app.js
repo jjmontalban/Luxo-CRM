@@ -68,8 +68,10 @@ const Toast = Swal.mixin({
 })
 window.Toast = Toast
 
-// moment and filter
-import {filter} from './filter'
+// moment
+/* import {filter} from './filter'
+ */
+var moment = require('moment');
 
 // editor support
 import 'v-markdown-editor/dist/v-markdown-editor.css';
@@ -80,4 +82,7 @@ Vue.use(Editor);
 const app = new Vue({
     el: '#app',
     router,
+    data:{
+        moment: moment
+    }
 });

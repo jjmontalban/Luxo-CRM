@@ -128,6 +128,7 @@ class CustomerController extends Controller
         $customer->phone_2 = $request->phone_2;
         $customer->cif = $request->cif;
         $customer->vat_number = $request->vat_number;
+        $customer->updated_at = now();
         $customer->save();     
 
         //Direccion principal          

@@ -1,4 +1,4 @@
-import moment from 'moment';
+/* import moment from 'moment';
 import Vue from 'vue';
 
 Vue.filter('timeformate', (value)=>{
@@ -6,4 +6,4 @@ Vue.filter('timeformate', (value)=>{
 })
 Vue.filter('sortLentg', (text,length,sufix)=>{
     return text.substring(0,length)+sufix;
-})
+}) */

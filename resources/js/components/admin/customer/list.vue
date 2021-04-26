@@ -51,7 +51,9 @@
                     <th scope="col">Empresa (Nombre y apellidos)</th>
                     <th scope="col">Email</th>
                     <th scope="col">Teléfonos</th>
+                    <th scope="col">Identificación</th>
                     <th scope="col">Dirección</th>
+                    <th scope="col">Actualizado hace</th>
                     <th scope="col" class="text-center">Acciones</th>
                   </tr>
                 </thead>
@@ -62,22 +64,27 @@
                       <tr v-else-if="customer.firstname">{{ customer.firstname}}</tr>
                       <tr v-if="customer.lastname">{{ customer.lastname}}</tr>
                     </td>
-                    <td>{{ customer.email }}</td>
+                    <td v-if="customer.email">{{ customer.email }}</td>
+                    <td v-else></td>
                     <td>
                       <tr v-if="customer.phone_1">{{ customer.phone_1 }}</tr>
                       <tr v-if="customer.phone_2">{{ customer.phone_2 }}</tr>
                     </td>
+                    <td>
+                      <tr v-if="customer.cif">{{ customer.cif }}</tr>
+                      <tr v-else-if="customer.vat_number">{{ customer.vat_number }}</tr>
+                      <tr v-else></tr>
+                    </td>
                     <td v-if="customer.addresses">
                         <tr v-for="(address, index) in customer.addresses" :key="address.id">
-                          <td>{{ address.address }}</td>
-                          <td>{{ address.postcode }}</td>
-                          <td>{{ address.city }}</td>
-                          <td v-if="address.province">{{ address.province.name }}</td>
+                          <td>{{ address.address }}. {{ address.postcode }} {{ address.city }}</td>
+                          <td v-if="address.province"> ({{ address.province.name }})</td>
                           <td v-if="address.country && address.country.id != 6">{{ address.country.name }}</td>
                        </tr>
                     </td> 
-                    <td v-else>
-                        Sin dirección
+                    <td v-else></td>
+                    <td>
+                       {{ timeSinceUpdate(customer.updated_at) }}
                     </td>
                     <td class="text-center">
                       <router-link :to="`/cliente/${customer.id}`" class="btn btn-primary btn-sm" tag="button"><i class="fas fa-eye"></i></router-link>
@@ -473,6 +480,13 @@ export default {
     computed: { },
 
     methods: {
+
+        timeSinceUpdate(fecha){
+          moment.locale('es');
+          if(fecha)
+            return moment(fecha).fromNow();
+          return " ";
+        },
 
         getProvinces() {
             axios.get("/api/provincias")

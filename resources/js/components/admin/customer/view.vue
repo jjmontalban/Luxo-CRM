@@ -36,7 +36,7 @@
                   <span class="text-muted">compras</span>
                 </a>
                 <strong>Última actualización:</strong>
-                <span class="text-muted"> hace 1 año</span>
+                <span class="text-muted">{{ timeSinceUpdate(customer.updated_at) }}</span>
               </div>
             </div>
           </div>
@@ -179,6 +179,8 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
 export default {
     name: "customerView",
 
@@ -203,6 +205,16 @@ export default {
                 console.log(e)
             })
     },
+
+    methods: {
+
+        timeSinceUpdate(fecha){
+          moment.locale('es');
+          if(fecha)
+            return moment(fecha).fromNow();
+          return "Sin actualizar";
+        },
+    }
     
 }
 </script>
