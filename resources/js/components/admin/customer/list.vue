@@ -18,30 +18,33 @@
           </div>
 
           <div class="card-body">
-            <div class="mb-3">
-              <div class="row">
-                <div class="col-md-1">
-                  <strong>Buscar por :</strong>
-                </div>
-                <div class="col-md-1">
-                  <select v-model="queryFiled" class="form-control" id="fileds">
-                    <option value="firstname">Nombre</option>
-                    <option value="lastname">Apellidos</option>
-                    <option value="company">Empresa</option>
-                    <option value="email">Email</option>
-                    <option value="phone_1">Telefonos 1</option>
-                    <option value="phone_2">Telefono 2</option>
-                    <option value="provincia">Provincia</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <input v-model="query" type="text" class="form-control" placeholder="Buscar...">
-                </div>
-                <div class="col-md-3">
-                  <export-excel  class="btn btn-success" :data="this.customers" :fields = "json_fields" name="clientes.xls">
-                      EXPORTAR LISTA
-                  </export-excel>                
-                </div>
+            <div class="row mb-3">
+              <div class="col-md-1">
+                <strong>Buscar por :</strong>
+              </div>
+              <div class="col-md-2">
+                <select v-model="queryFiled" class="form-control" id="fileds">
+                  <option value="firstname">Nombre</option>
+                  <option value="lastname">Apellidos</option>
+                  <option value="company">Empresa</option>
+                  <option value="email">Email</option>
+                  <option value="phone_1">Telefonos 1</option>
+                  <option value="phone_2">Telefono 2</option>
+                  <option value="provincia">Provincia</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                  <input v-model="query" type="text" class="form-control" placeholder="valor a buscar...">                  
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-info" @click="searchData">
+                    BUSCAR
+                </button>
+              </div>
+              <div class="col-md-2">
+                <export-excel  class="btn btn-success" :data="this.customers" :fields = "json_fields" name="clientes.xls">
+                    EXPORTAR LISTA
+                </export-excel>                
               </div>
             </div>
             <div class="table-responsive">
@@ -78,7 +81,7 @@
                     <td v-if="customer.addresses">
                         <tr v-for="(address, index) in customer.addresses" :key="address.id">
                           <td>{{ address.address }}. {{ address.postcode }} {{ address.city }}</td>
-                          <td v-if="address.province"> ({{ address.province.name }})</td>
+                          <td v-if="address.province"> {{ address.province.name }}</td>
                           <td v-if="address.country && address.country.id != 6">{{ address.country.name }}</td>
                        </tr>
                     </td> 
@@ -464,17 +467,6 @@ export default {
             };
         },
 
-    watch: {
-        query: function (newQ, old) {
-            this.pagination.current_page=1
-            if (newQ === "") {
-                this.getData();
-            } else {
-                this.searchData();
-            }
-        }
-    },
-
     created() { },
 
     computed: { },
@@ -539,8 +531,8 @@ export default {
                     this.customers = res.data.data;
                     this.pagination = res.data.meta;
                     this.$Progress.finish();
-                })
-                .catch(e => {
+                    
+                }).catch(e => {
                     console.log(e);
                     this.$Progress.fail();
                 });

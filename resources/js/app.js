@@ -69,8 +69,6 @@ const Toast = Swal.mixin({
 window.Toast = Toast
 
 // moment
-/* import {filter} from './filter'
- */
 var moment = require('moment');
 
 // editor support
