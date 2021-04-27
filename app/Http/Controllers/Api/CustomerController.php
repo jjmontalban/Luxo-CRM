@@ -36,7 +36,25 @@ class CustomerController extends Controller
     public function search($field,$query)
     {
         $query= trim($query);
-        return new CustomerCollection(Customer::with('addresses')->where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));    
+        
+        $res = new CustomerCollection(Customer::with('addresses')->where($field,'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));   
+
+        if($field == "firstname" && $res->count() == 0){
+            $res = new CustomerCollection(Customer::with('addresses')->where("lastname",'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100));
+            if($res->count()==0){
+                return new CustomerCollection(Customer::with('addresses')->where("company",'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100)); 
+            }
+        }
+
+        if($field == "phone_1" && $res->count()==0){
+            return new CustomerCollection(Customer::with('addresses')->where("phone_2",'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100)); 
+        }
+        
+        if($field == "cif" && $res->count()==0){
+            return new CustomerCollection(Customer::with('addresses')->where("vat_number",'LIKE',"%$query%")->orderBy('id','DESC')->paginate(100)); 
+        }
+
+        return $res; 
     }
 
     /**

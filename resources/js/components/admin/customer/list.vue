@@ -24,13 +24,10 @@
               </div>
               <div class="col-md-2">
                 <select v-model="queryFiled" class="form-control" id="fileds">
-                  <option value="firstname">Nombre</option>
-                  <option value="lastname">Apellidos</option>
-                  <option value="company">Empresa</option>
+                  <option value="firstname">Empresa, nombre o apellidos</option>
                   <option value="email">Email</option>
-                  <option value="phone_1">Telefonos 1</option>
-                  <option value="phone_2">Telefono 2</option>
-                  <option value="provincia">Provincia</option>
+                  <option value="phone_1">Teléfono</option>
+                  <option value="cif">Identificación</option>
                 </select>
               </div>
               <div class="col-md-2">
@@ -64,8 +61,7 @@
                   <tr v-for="(customer, index) in customers" :key="customer.id">
                     <td> 
                       <tr v-if="customer.company">{{ customer.company}}</tr>
-                      <tr v-else-if="customer.firstname">{{ customer.firstname}}</tr>
-                      <tr v-if="customer.lastname">{{ customer.lastname}}</tr>
+                      <tr v-if="customer.firstname">({{ customer.firstname}} {{ customer.lastname}})</tr>
                     </td>
                     <td v-if="customer.email">{{ customer.email }}</td>
                     <td v-else></td>
