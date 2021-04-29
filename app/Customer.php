@@ -14,4 +14,16 @@ class Customer extends Model
         return $this->hasMany(Address::class);
     }
 
+
+    public function scopeFilterByProvince($query, $province_id)
+    {
+        return $query->when($province_id,function($query) use ($province_id){
+            $query->whereHas('addresses', function($query) use($province_id)
+                {
+                $query->where('province_id', $province_id);
+                }); 
+        });
+    }
+    
+
 }

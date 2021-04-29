@@ -6,6 +6,7 @@ use App\Address;
 use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerCollection;
+use Facade\Ignition\Middleware\CustomizeGrouping;
 //use App\Http\Resources\CustomerResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,18 @@ class CustomerController extends Controller
     {
        return Customer::where('id',$id)->with('addresses')->first();
     }
+
+
+    /**
+     * Filter the customer by province.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filter($province_id)
+    {
+        return new CustomerCollection(Customer::filterByProvince($province_id)->with('addresses')->orderBy('id','DESC')->paginate(100));
+    }
+    
 
     public function search($field,$query)
     {

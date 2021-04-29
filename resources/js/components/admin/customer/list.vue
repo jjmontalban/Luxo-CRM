@@ -14,6 +14,9 @@
                 Recargar
                 <i class="fas fa-sync"></i>
               </button>
+              <export-excel  class="btn btn-success" :data="this.customers" :fields = "json_fields" name="clientes.xls">
+                    EXPORTAR LISTA
+              </export-excel>   
             </div>
           </div>
 
@@ -33,15 +36,28 @@
               <div class="col-md-2">
                   <input v-model="query" type="text" class="form-control" placeholder="valor a buscar...">                  
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <button type="button" class="btn btn-info" @click="searchData">
                     BUSCAR
                 </button>
               </div>
+              <div class="col-md-1">
+                <strong>Filtrar por :</strong>
+              </div>
               <div class="col-md-2">
-                <export-excel  class="btn btn-success" :data="this.customers" :fields = "json_fields" name="clientes.xls">
-                    EXPORTAR LISTA
-                </export-excel>                
+                <select v-model="province_id"
+                        :class="{ 'is-invalid': form.errors.has('province_id') }"
+                        class="form-control select2 select2-danger"
+                        data-dropdown-css-class="select2-danger" style="width: 100%;">
+                    <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
+                  <option value="">Provincia</option>
+                </select>
+                <has-error :form="form" field="province_id"></has-error>
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-info" @click="filterData">
+                    FILTRAR
+                </button>
               </div>
             </div>
             <div class="table-responsive">
@@ -411,6 +427,7 @@ export default {
             customers: [],
             provinces:[],
             countries:[],
+                province_id:"",
 
             form: new Form({
                 id: "",
@@ -522,6 +539,22 @@ export default {
             console.log(this.query);
             this.$Progress.start();
             axios.get("/api/cliente/buscar/" + this.queryFiled + "/" + this.query + "?page=" + this.pagination.current_page)
+                .then(res => {
+                    console.log(res.data.data);
+                    this.customers = res.data.data;
+                    this.pagination = res.data.meta;
+                    this.$Progress.finish();
+                    
+                }).catch(e => {
+                    console.log(e);
+                    this.$Progress.fail();
+                });
+        },
+
+        filterData() {
+            console.log(this.province_id);
+            this.$Progress.start();
+            axios.get("/api/cliente/filtrar/" + this.province_id + "/" + "?page=" + this.pagination.current_page)
                 .then(res => {
                     console.log(res.data.data);
                     this.customers = res.data.data;

@@ -19,6 +19,11 @@ class Address extends Model
         return $this->belongsTo(Province::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class,'customer_id');
+    }
+
     protected $with = ['country:id,name', 'province:id,name'];
 
 }
