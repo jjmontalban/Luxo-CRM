@@ -7,6 +7,7 @@ use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerCollection;
 use Facade\Ignition\Middleware\CustomizeGrouping;
+use Illuminate\Validation\Rule;
 //use App\Http\Resources\CustomerResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -136,13 +137,14 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $customer = Customer::findOrfail($id);
+
         $this->validate($request,[
             'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|unique:customers',
-            'phone_1' => 'required|unique:customers,phone_1,'.$id,
-            'cif' => 'nullable|unique:customers,cif,'.$id,
-            'vat_number' => 'nullable|unique:customers,vat_number,'.$id,
+            'email' => 'required', Rule::unique('customers')->ignore($customer->id),
+            'phone_1' => 'required', Rule::unique('customers')->ignore($customer->phone_1),
+            'cif' => 'nullable', Rule::unique('customers')->ignore($customer->cif),
+            'vat_number' => 'nullable', Rule::unique('customers')->ignore($customer->vat_number),
             'addresses.*.country_id' => 'required',
             'addresses.*.province_id' => 'required',
             'addresses.*.address' => 'required',
@@ -150,7 +152,6 @@ class CustomerController extends Controller
             'addresses.*.city' => 'required',
         ]);
 
-        $customer = Customer::findOrfail($id);
         $customer->firstname = $request->firstname;
         $customer->lastname = $request->lastname;
         $customer->company = $request->company;
