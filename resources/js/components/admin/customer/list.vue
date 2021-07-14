@@ -194,7 +194,7 @@
                   <label>Email</label>
                   <input
                     v-model="form.email"
-                    type="email"
+                    type="text"
                     name="email"
                     class="form-control"
                     :class="{ 'is-invalid': form.errors.has('email') }"

@@ -78,19 +78,19 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        /* $this->validate($request,[
+        $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:customers',
+            'email' => 'required|unique:customers',
             'phone_1' => 'required|unique:customers',
-            'cif' => 'required|unique:customers',
+            'cif' => 'nullable|unique:customers',
             'vat_number' => 'nullable|unique:customers',
             'country_id' => 'required',
             'province_id' => 'required',
             'address' => 'required',
             'postcode' => 'required',
             'city' => 'required',
-        ]); */
+        ]);
 
         $customer = new Customer();
         $customer->firstname = $request->firstname;
@@ -136,19 +136,19 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /* $this->validate($request,[
+        $this->validate($request,[
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:customers,email,'.$id,
+            'email' => 'required|unique:customers',
             'phone_1' => 'required|unique:customers,phone_1,'.$id,
-            'cif' => 'required|unique:customers,cif,'.$id,
+            'cif' => 'nullable|unique:customers,cif,'.$id,
             'vat_number' => 'nullable|unique:customers,vat_number,'.$id,
             'addresses.*.country_id' => 'required',
             'addresses.*.province_id' => 'required',
             'addresses.*.address' => 'required',
             'addresses.*.postcode' => 'required',
             'addresses.*.city' => 'required',
-        ]); */
+        ]);
 
         $customer = Customer::findOrfail($id);
         $customer->firstname = $request->firstname;
