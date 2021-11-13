@@ -3,7 +3,9 @@
 
 # Galactic Blum Customers 
 
-CRM App Vue with Laravel Backend login stystem. Passport + security layer & + AuthController
+CRM App Vue with Laravel Backend login stystem. Passport + security layer & + AuthController.
+
+Project allocated in [Rosaluxo](http://rosaluxo.com/)
 
 ## Buid with 🛠️
 
