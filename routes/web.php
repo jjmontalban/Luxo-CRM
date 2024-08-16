@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,14 +13,6 @@
 |
 */
 
-Route::view('/','auth.login')->name('login');
-
-Auth::routes();
-
-// Rutas del enrutador de Vue (route-link)
-Route::get('/clientes', 'HomeController@index');
-Route::get('/cliente/{id}', 'HomeController@index');
-
-Route::group(['middleware' => ['auth']], function () {
-
+Route::get('/', function () {
+    return view('welcome');
 });

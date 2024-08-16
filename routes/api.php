@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,29 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::apiResource('clientes','CustomerController');
-Route::get('/cliente/{id}', 'CustomerController@show');
-Route::get('cliente/buscar/{field}/{query}','CustomerController@search');
-Route::get('cliente/filtrar/{field}','CustomerController@filter');
-Route::get('provincias','ProvinceController@index');
-Route::get('paises','CountryController@index');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
