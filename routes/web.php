@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SincroController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +24,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('customers', CustomerController::class);
+Route::resource('orders', OrderController::class);
+Route::resource('addresses', AddressController::class);
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
+Route::post('sincro', [SincroController::class, 'sincro']);
+Route::resource('users', UserController::class);
