@@ -20,12 +20,9 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/customers', [CustomerController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::resource('customers', CustomerController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('addresses', AddressController::class);
 Route::resource('products', ProductController::class);
