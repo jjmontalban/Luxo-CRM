@@ -1,31 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SincroController;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Aquí solo vamos a redirigir la raíz de la aplicación hacia el panel de control de Filament.
+| Filament manejará sus propias rutas internamente.
 |
 */
-Route::get('/customers', [CustomerController::class, 'index']);
 
-
-Route::resource('orders', OrderController::class);
-Route::resource('addresses', AddressController::class);
-Route::resource('products', ProductController::class);
-Route::resource('categories', CategoryController::class);
-Route::post('sincro', [SincroController::class, 'sincro']);
-Route::resource('users', UserController::class);
+Route::get('/', function () {
+    // Redirige a Filament
+    return Redirect::to('/trastienda');
+});

@@ -19,6 +19,7 @@ class CustomerFactory extends Factory
             'phone1' => $this->faker->phoneNumber(),
             'phone2' => $this->faker->optional()->phoneNumber(),
             'nif' => $this->faker->unique()->numerify('#########X'),
+            'vat_number' => $this->faker->optional()->bothify('??########'),
         ];
     }
 }

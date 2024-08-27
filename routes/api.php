@@ -19,7 +19,3 @@ use App\Http\Controllers\CustomerController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/customers', [CustomerController::class, 'getCustomers']);
-Route::delete('/customers/{id}', [CustomerController::class, 'destroy']);
-Route::get('/customers/{id}', [CustomerController::class, 'show']);
